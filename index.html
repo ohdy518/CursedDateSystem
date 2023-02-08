@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+    function specialDay() {
+      const specialDays = [
+        { name: 'Lunar New Year', date: new Date(2023, 0, 22) },
+        { name: "Valentine's Day", date: new Date(2023, 1, 14) },
+        { name: 'Pi Day', date: new Date(2023, 2, 14) },
+        { name: "April Fools' Day", date: new Date(2023, 3, 1) },
+        { name: 'World Turtle Day', date: new Date(2023, 4, 23) },
+        { name: 'Summer Solstice', date: new Date(2023, 5, 21) },
+        { name: 'Independence Day', date: new Date(2023, 6, 4) },
+        { name: 'US Coast Guard Day', date: new Date(2023, 7, 4) },
+        { name: 'World Ozone Day', date: new Date(2023, 8, 16) },
+        { name: 'Int’l Day of Older Persons', date: new Date(2023, 9, 1) },
+        { name: 'National Butter Day', date: new Date(2023, 10, 17) },
+        { name: 'Christmas', date: new Date(2023, 11, 25) }
+      ];
+      const input = document.getElementById('dateInput').value;
+      const inputDate = new Date(input);
+
+      let closestDay = specialDays[0];
+      let closestDiff = inputDate - specialDays[0].date;
+
+      for (let i = 1; i < specialDays.length; i++) {
+        const diff = inputDate - specialDays[i].date;
+        if (Math.abs(diff) < Math.abs(closestDiff)) {
+          closestDay = specialDays[i];
+          closestDiff = diff;
+        }
+      }
+
+      const daysDiff = Math.round(closestDiff / 1000 / 60 / 60 / 24);
+      let result = `${Math.abs(daysDiff)} day(s)`;
+      if (daysDiff > 0) {
+        result += ' after ';
+      } else {
+        result += ' before ';
+      }
+      result += closestDay.name;
+      document.getElementById('result').innerHTML = result;
+    }
+  </script>
+</head>
+<body>
+  <input type="text" id="dateInput" placeholder="YYYY.MM.DD" />
+  <button onclick="specialDay()">Submit</button>
+  <p id="result"></p>
+</body>
+</html>
